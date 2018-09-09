@@ -20,12 +20,14 @@
 #ifndef SKPOKEREVAL_PROFILER_H
 #define SKPOKEREVAL_PROFILER_H
 
-#include "SevenEval.h"
 #include <algorithm>
 #include <random>
 #include <iostream>
 #include <chrono>
 #include <limits>
+
+#include "Constants.h"
+#include "SevenEval.h"
 
 template <class T>
 inline void doNotOptimiseAway(T&& datum) {
@@ -36,7 +38,7 @@ class Profiler {
  public:
   static double RandomAccessProfile(unsigned const count) {
     std::default_random_engine gen;
-    std::uniform_int_distribution<uint8_t> dist(0, 51);
+    std::uniform_int_distribution<uint8_t> dist(0, DECK_SIZE - 1);
     int const length = 28 * count;
     uint8_t* const buffer = (uint8_t*)malloc(length * sizeof(uint8_t));
     for (int i = 0; i < length; i += 7) {

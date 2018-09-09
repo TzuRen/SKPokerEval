@@ -24,7 +24,7 @@
 #include <cstdint>
 
 class FiveEval {
-public:
+ public:
   FiveEval();
   ~FiveEval();
   // Get the rank of a hand comprising five cards, each represented by an
@@ -35,12 +35,13 @@ public:
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // The higher the rank the better the hand. Two hands of equal rank tie.
   uint16_t GetRank(int, int, int, int, int, int, int) const;
-private:
-  uint16_t *mRankPtr;
-  uint16_t *mFlushRankPtr;
+
+ private:
+  uint16_t* mRankPtr;
+  uint16_t* mFlushRankPtr;
   uint32_t mDeckcardsFace[DECK_SIZE];
   uint16_t mDeckcardsFlush[DECK_SIZE];
   uint16_t mDeckcardsSuit[DECK_SIZE];
 };
 
-#endif // SKPOKEREVAL_FIVEEVAL_H
+#endif  // SKPOKEREVAL_FIVEEVAL_H

@@ -5,7 +5,7 @@
 #include "../src/FiveEval.h"
 
 class FiveEvalTest : public ::testing::Test {
-protected:
+ protected:
   virtual void SetUp() {}
   virtual void TearDown() {}
   FiveEval const eval;
@@ -14,25 +14,22 @@ protected:
 TEST_F(FiveEvalTest, HighCard) {
   long rank = LONG_MIN;
   for (int i = 5; i < 13; ++i) {
-    int const I = ((12-i)<<2) + 1; // No flushes.
+    int const I = ((12 - i) << 2) + 1;  // No flushes.
     for (int j = 3; j < i; ++j) {
-      int const J = (12-j)<<2;
+      int const J = (12 - j) << 2;
       for (int k = 2; k < j; ++k) {
-        int const K = (12-k)<<2;
+        int const K = (12 - k) << 2;
         for (int l = 1; l < k; ++l) {
-          int const L = (12-l)<<2;
+          int const L = (12 - l) << 2;
           for (int m = 0; m < l; ++m) {
-            if (i-m == 4 || (i == 12 && j == 3)) {
+            if (i - m == 4 || (i == 12 && j == 3)) {
               continue;
             }
-            int const M = (12-m)<<2;
+            int const M = (12 - m) << 2;
             int const next_rank = eval.GetRank(I, J, K, L, M);
-            ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                                       << I << ", "
-                                       << J << ", "
-                                       << K << ", "
-                                       << L << ", "
-                                       << M << " is invalid.";
+            ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I
+                                       << ", " << J << ", " << K << ", " << L
+                                       << ", " << M << " is invalid.";
             rank = next_rank;
           }
         }
@@ -52,29 +49,26 @@ TEST_F(FiveEvalTest, WorstPairBeatsBestHighCard) {
 TEST_F(FiveEvalTest, Pair) {
   long rank = LONG_MIN;
   for (int i = 0; i < 13; ++i) {
-    int const I = (12-i)<<2;
+    int const I = (12 - i) << 2;
     for (int j = 2; j < 13; ++j) {
       if (j == i) {
         continue;
       }
-      int const J = (12-j)<<2;
+      int const J = (12 - j) << 2;
       for (int k = 1; k < j; ++k) {
         if (k == i) {
           continue;
         }
-        int const K = (12-k)<<2;
+        int const K = (12 - k) << 2;
         for (int l = 0; l < k; ++l) {
           if (l == i) {
             continue;
           }
-          int const L = (12-l)<<2;
-          int const next_rank = eval.GetRank(I, I+1, J, K, L);
-          ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                                     << I << ", "
-                                     << I+1 << ", "
-                                     << J << ", "
-                                     << K << ", "
-                                     << L << " is invalid.";
+          int const L = (12 - l) << 2;
+          int const next_rank = eval.GetRank(I, I + 1, J, K, L);
+          ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I
+                                     << ", " << I + 1 << ", " << J << ", " << K
+                                     << ", " << L << " is invalid.";
           rank = next_rank;
         }
       }
@@ -93,21 +87,18 @@ TEST_F(FiveEvalTest, WorstTwoPairBeatsBestPair) {
 TEST_F(FiveEvalTest, TwoPair) {
   long rank = LONG_MIN;
   for (int i = 1; i < 13; ++i) {
-    int const I = (12-i)<<2;
+    int const I = (12 - i) << 2;
     for (int j = 0; j < i; ++j) {
-      int const J = (12-j)<<2;
+      int const J = (12 - j) << 2;
       for (int k = 0; k < 13; ++k) {
         if (k == i || k == j) {
           continue;
         }
-        int const K = (12-k)<<2;
-        int const next_rank = eval.GetRank(I, I+1, J, J+1, K);
-        ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                                   << I << ", "
-                                   << I+1 << ", "
-                                   << J << ", "
-                                   << J+1 << ", "
-                                   << K << " is invalid.";
+        int const K = (12 - k) << 2;
+        int const next_rank = eval.GetRank(I, I + 1, J, J + 1, K);
+        ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I
+                                   << ", " << I + 1 << ", " << J << ", "
+                                   << J + 1 << ", " << K << " is invalid.";
         rank = next_rank;
       }
     }
@@ -125,24 +116,21 @@ TEST_F(FiveEvalTest, WorstTripleBeatsBestTwoPair) {
 TEST_F(FiveEvalTest, Triple) {
   long rank = LONG_MIN;
   for (int i = 0; i < 13; ++i) {
-    int const I = (12-i)<<2;
+    int const I = (12 - i) << 2;
     for (int j = 1; j < 13; ++j) {
       if (j == i) {
         continue;
       }
-      int const J = (12-j)<<2;
+      int const J = (12 - j) << 2;
       for (int k = 0; k < j; ++k) {
         if (k == i) {
           continue;
         }
-        int const K = (12-k)<<2;
-        int const next_rank = eval.GetRank(I, I+1, I+2, J, K);
-        ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                                   << I << ", "
-                                   << I+1 << ", "
-                                   << I+2 << ", "
-                                   << J << ", "
-                                   << K << " is invalid.";
+        int const K = (12 - k) << 2;
+        int const next_rank = eval.GetRank(I, I + 1, I + 2, J, K);
+        ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I
+                                   << ", " << I + 1 << ", " << I + 2 << ", "
+                                   << J << ", " << K << " is invalid.";
         rank = next_rank;
       }
     }
@@ -158,16 +146,13 @@ TEST_F(FiveEvalTest, WorstStraightBeatsBestTriple) {
 }
 
 TEST_F(FiveEvalTest, Straight) {
-  int rank = eval.GetRank(37, 40, 44, 48, 0); // Straight, Ace low.
+  int rank = eval.GetRank(37, 40, 44, 48, 0);  // Straight, Ace low.
   for (int i = 0; i < 9; ++i) {
-    int const I = (12-i)<<2;
-    int const next_rank = eval.GetRank(I-15, I-12, I-8, I-4, I);
-    ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                               << I-15 << ", "
-                               << I-12 << ", "
-                               << I-8 << ", "
-                               << I-4 << ", "
-                               << I << " is invalid.";
+    int const I = (12 - i) << 2;
+    int const next_rank = eval.GetRank(I - 15, I - 12, I - 8, I - 4, I);
+    ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I - 15
+                               << ", " << I - 12 << ", " << I - 8 << ", "
+                               << I - 4 << ", " << I << " is invalid.";
     rank = next_rank;
   }
 }
@@ -183,25 +168,22 @@ TEST_F(FiveEvalTest, WorstFlushBeatsBestStraight) {
 TEST_F(FiveEvalTest, Flush) {
   long rank = LONG_MIN;
   for (int i = 5; i < 13; ++i) {
-    int const I = (12-i)<<2;
+    int const I = (12 - i) << 2;
     for (int j = 3; j < i; ++j) {
-      int const J = (12-j)<<2;
+      int const J = (12 - j) << 2;
       for (int k = 2; k < j; ++k) {
-        int const K = (12-k)<<2;
+        int const K = (12 - k) << 2;
         for (int l = 1; l < k; ++l) {
-          int const L = (12-l)<<2;
+          int const L = (12 - l) << 2;
           for (int m = 0; m < l; ++m) {
-            if (i-m == 4 || (i == 12 && j == 3)) {
+            if (i - m == 4 || (i == 12 && j == 3)) {
               continue;
             }
-            int const M = (12-m)<<2;
+            int const M = (12 - m) << 2;
             int const next_rank = eval.GetRank(I, J, K, L, M);
-            ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                                       << I << ", "
-                                       << J << ", "
-                                       << K << ", "
-                                       << L << ", "
-                                       << M << " is invalid.";
+            ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I
+                                       << ", " << J << ", " << K << ", " << L
+                                       << ", " << M << " is invalid.";
             rank = next_rank;
           }
         }
@@ -221,19 +203,16 @@ TEST_F(FiveEvalTest, WorstFullHouseBeatsBestFlush) {
 TEST_F(FiveEvalTest, FullHouse) {
   long rank = LONG_MIN;
   for (int i = 0; i < 13; ++i) {
-    int const I = (12-i)<<2;
+    int const I = (12 - i) << 2;
     for (int j = 0; j < 13; ++j) {
       if (j == i) {
         continue;
       }
-      int const J = (12-j)<<2;
-      int const next_rank = eval.GetRank(I, I+1, I+2, J, J+1);
-      ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                                 << I << ", "
-                                 << I+1 << ", "
-                                 << I+2 << ", "
-                                 << J << ", "
-                                 << J+1 << " is invalid.";
+      int const J = (12 - j) << 2;
+      int const next_rank = eval.GetRank(I, I + 1, I + 2, J, J + 1);
+      ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I << ", "
+                                 << I + 1 << ", " << I + 2 << ", " << J << ", "
+                                 << J + 1 << " is invalid.";
       rank = next_rank;
     }
   }
@@ -250,19 +229,16 @@ TEST_F(FiveEvalTest, WorstQuadBeatsBestFullHouse) {
 TEST_F(FiveEvalTest, Quad) {
   long rank = LONG_MIN;
   for (int i = 0; i < 13; ++i) {
-    int const I = (12-i)<<2;
+    int const I = (12 - i) << 2;
     for (int j = 0; j < 13; ++j) {
       if (j == i) {
         continue;
       }
-      int const J = (12-j)<<2;
-      int const next_rank = eval.GetRank(I, I+1, I+2, I+3, J);
-      ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                                 << I << ", "
-                                 << I+1 << ", "
-                                 << I+2 << ", "
-                                 << I+3 << ", "
-                                 << J << " is invalid.";
+      int const J = (12 - j) << 2;
+      int const next_rank = eval.GetRank(I, I + 1, I + 2, I + 3, J);
+      ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I << ", "
+                                 << I + 1 << ", " << I + 2 << ", " << I + 3
+                                 << ", " << J << " is invalid.";
       rank = next_rank;
     }
   }
@@ -277,16 +253,13 @@ TEST_F(FiveEvalTest, WorstStraightFlushBeatsBestQuad) {
 }
 
 TEST_F(FiveEvalTest, StraightFlush) {
-  int rank = eval.GetRank(36, 40, 44, 48, 0); // Straight flush, Ace low.
+  int rank = eval.GetRank(36, 40, 44, 48, 0);  // Straight flush, Ace low.
   for (int i = 0; i < 9; ++i) {
-    int const I = (12-i)<<2;
-    int const next_rank = eval.GetRank(I-16, I-12, I-8, I-4, I);
-    ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at "
-                               << I-16 << ", "
-                               << I-12 << ", "
-                               << I-8 << ", "
-                               << I-4 << ", "
-                               << I << " is invalid.";
+    int const I = (12 - i) << 2;
+    int const next_rank = eval.GetRank(I - 16, I - 12, I - 8, I - 4, I);
+    ASSERT_GT(next_rank, rank) << "Rank " << next_rank << " at " << I - 16
+                               << ", " << I - 12 << ", " << I - 8 << ", "
+                               << I - 4 << ", " << I << " is invalid.";
     rank = next_rank;
   }
 }
@@ -320,22 +293,17 @@ TEST_F(FiveEvalTest, SevenCardHand) {
                         five[v++] = seven[z];
                       }
                     }
-                    int const rank = eval.GetRank(five[0], five[1],
-                        five[2], five[3], five[4]);
+                    int const rank = eval.GetRank(five[0], five[1], five[2],
+                                                  five[3], five[4]);
                     if (rbf < rank) {
                       rbf = rank;
                     }
                   }
                 }
                 auto const rbs = eval.GetRank(i, j, k, l, m, n, p);
-                ASSERT_EQ(rbf, rbs) << "Rank " << rbs << " at "
-                                    << i << ", "
-                                    << j << ", "
-                                    << k << ", "
-                                    << l << ", "
-                                    << m << ", "
-                                    << n << ", "
-                                    << p << " is invalid.";
+                ASSERT_EQ(rbf, rbs) << "Rank " << rbs << " at " << i << ", "
+                                    << j << ", " << k << ", " << l << ", " << m
+                                    << ", " << n << ", " << p << " is invalid.";
                 ++inner_count;
               }
             }

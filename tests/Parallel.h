@@ -32,18 +32,15 @@ void ParallelFor(int const begin, int const end, F const fn) {
   int const num_cpus = std::thread::hardware_concurrency();
   std::vector<std::future<void>> futures(num_cpus);
   for (int cpu = 0; cpu < num_cpus; ++cpu) {
-    futures[cpu] = std::async(
-      std::launch::async,
-      [&idx, end, &fn]() {
-        while (true) {
-          int const i = idx++;
-          if (i >= end) {
-            break;
-          }
-          fn(i);
+    futures[cpu] = std::async(std::launch::async, [&idx, end, &fn]() {
+      while (true) {
+        int const i = idx++;
+        if (i >= end) {
+          break;
         }
+        fn(i);
       }
-    );
+    });
   }
   for (int cpu = 0; cpu < num_cpus; ++cpu) {
     futures[cpu].get();

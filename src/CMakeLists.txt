@@ -1,3 +1,1 @@
-add_library(skpokereval
-  FiveEval.cpp
-)
+add_library(skpokereval FiveEval.cpp)

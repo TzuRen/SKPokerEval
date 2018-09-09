@@ -20,10 +20,12 @@
 #ifndef SKPOKEREVAL_CONSTANTS_H_
 #define SKPOKEREVAL_CONSTANTS_H_
 
-#define DECK_SIZE 52
+#include <stdint.h>
+
+#define DECK_SIZE 36
 
 #define NUMBER_OF_SUITS 4
-#define NUMBER_OF_FACES 13
+#define NUMBER_OF_FACES 9
 
 #define SPADE 0
 #define HEART 1
@@ -36,25 +38,55 @@
 #define INDEX_CLUB 3
 #define NOT_A_SUIT (-1)
 
-#define TWO_FIVE 0
-#define THREE_FIVE 1
-#define FOUR_FIVE 5
-#define FIVE_FIVE 22
-#define SIX_FIVE 94
-#define SEVEN_FIVE 312
-#define EIGHT_FIVE 992
-#define NINE_FIVE 2422
-#define TEN_FIVE 5624
-#define JACK_FIVE 12522
-#define QUEEN_FIVE 19998
-#define KING_FIVE 43258
-#define ACE_FIVE 79415
+// Cards
+constexpr uint8_t kAs = 0;
+constexpr uint8_t kAh = 1;
+constexpr uint8_t kAd = 2;
+constexpr uint8_t kAc = 3;
+constexpr uint8_t kKs = 4;
+constexpr uint8_t kKh = 5;
+constexpr uint8_t kKd = 6;
+constexpr uint8_t kKc = 7;
+constexpr uint8_t kQs = 8;
+constexpr uint8_t kQh = 9;
+constexpr uint8_t kQd = 10;
+constexpr uint8_t kQc = 11;
+constexpr uint8_t kJs = 12;
+constexpr uint8_t kJh = 13;
+constexpr uint8_t kJd = 14;
+constexpr uint8_t kJc = 15;
+constexpr uint8_t kTs = 16;
+constexpr uint8_t kTh = 17;
+constexpr uint8_t kTd = 18;
+constexpr uint8_t kTc = 19;
+constexpr uint8_t k9s = 20;
+constexpr uint8_t k9h = 21;
+constexpr uint8_t k9d = 22;
+constexpr uint8_t k9c = 23;
+constexpr uint8_t k8s = 24;
+constexpr uint8_t k8h = 25;
+constexpr uint8_t k8d = 26;
+constexpr uint8_t k8c = 27;
+constexpr uint8_t k7s = 28;
+constexpr uint8_t k7h = 29;
+constexpr uint8_t k7d = 30;
+constexpr uint8_t k7c = 31;
+constexpr uint8_t k6s = 32;
+constexpr uint8_t k6h = 33;
+constexpr uint8_t k6d = 34;
+constexpr uint8_t k6c = 35;
 
-#define TWO_FLUSH 1
-#define THREE_FLUSH TWO_FLUSH << 1
-#define FOUR_FLUSH THREE_FLUSH << 1
-#define FIVE_FLUSH FOUR_FLUSH << 1
-#define SIX_FLUSH FIVE_FLUSH << 1
+#define SIX_FIVE 0
+#define SEVEN_FIVE 1
+#define EIGHT_FIVE 5
+#define NINE_FIVE 22
+#define TEN_FIVE 94
+#define JACK_FIVE 312
+#define QUEEN_FIVE 992
+#define KING_FIVE 2422
+#define ACE_FIVE 5624
+
+#define SIX_FLUSH 1
 #define SEVEN_FLUSH SIX_FLUSH << 1
 #define EIGHT_FLUSH SEVEN_FLUSH << 1
 #define NINE_FLUSH EIGHT_FLUSH << 1
@@ -65,24 +97,21 @@
 #define ACE_FLUSH KING_FLUSH << 1
 
 // _SEVEN tag suppressed
-#define TWO 0
-#define THREE 1
-#define FOUR 5
-#define FIVE 22
-#define SIX 98
-#define SEVEN 453
-#define EIGHT 2031
-#define NINE 8698
-#define TEN 22854
-#define JACK 83661
-#define QUEEN 262349
-#define KING 636345
-#define ACE 1479181
+#define SIX 0
+#define SEVEN 1
+#define EIGHT 5
+#define NINE 22
+#define TEN 98
+#define JACK 453
+#define QUEEN 2031
+#define KING 8698
+#define ACE 22854
 // end of _SEVEN tag suppressed
 
 #define MAX_FIVE_NONFLUSH_KEY_INT ((4 * ACE_FIVE) + KING_FIVE)
 #define MAX_FIVE_FLUSH_KEY_INT \
   (ACE_FLUSH | KING_FLUSH | QUEEN_FLUSH | JACK_FLUSH | TEN_FLUSH)
+#define MAX_SEVEN_NONFLUSH_KEY_INT ((4 * ACE) + (3 * KING))
 #define MAX_SEVEN_FLUSH_KEY_INT                                    \
   (ACE_FLUSH | KING_FLUSH | QUEEN_FLUSH | JACK_FLUSH | TEN_FLUSH | \
    NINE_FLUSH | EIGHT_FLUSH)

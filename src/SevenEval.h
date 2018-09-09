@@ -20,13 +20,13 @@
 #ifndef SKPOKEREVAL_SEVENEVAL_H
 #define SKPOKEREVAL_SEVENEVAL_H
 
-#include "RankHash.h"
-#include "RankOffsets.h"
-#include "FlushRanks.h"
-#include "FlushCheck.h"
-#include "Deckcards.h"
-#include "Constants.h"
 #include <cstdint>
+
+#include "Constants.h"
+#include "Deckcards.h"
+#include "FlushCheck.h"
+#include "FlushRanks.h"
+#include "NonFlushRanks.h"
 
 class SevenEval final {
  public:
@@ -54,9 +54,7 @@ class SevenEval final {
       }
     }
     // Tear off the non-flush key strip, and look up the rank.
-    auto const hash = FACE_BIT_MASK & (unsigned)(31L * key);
-    return rank_hash[offsets[hash >> RANK_OFFSET_SHIFT] +
-                     (hash & RANK_HASH_MOD)];
+    return non_flush_ranks[FACE_BIT_MASK & key];
   }
 
  private:

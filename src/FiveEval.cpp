@@ -1,33 +1,33 @@
 #include "FiveEval.h"
 
+#include <iostream>
+
 FiveEval::FiveEval()
     : mRankPtr(new short unsigned[MAX_FIVE_NONFLUSH_KEY_INT + 1]),
       mFlushRankPtr(new short unsigned[MAX_FIVE_FLUSH_KEY_INT + 1]) {
-  uint32_t const face[13] = {TWO_FIVE, THREE_FIVE, FOUR_FIVE,  FIVE_FIVE,
-                             SIX_FIVE, SEVEN_FIVE, EIGHT_FIVE, NINE_FIVE,
-                             TEN_FIVE, JACK_FIVE,  QUEEN_FIVE, KING_FIVE,
-                             ACE_FIVE};
-  uint32_t const face_flush[13] = {
-      TWO_FLUSH,   THREE_FLUSH, FOUR_FLUSH, FIVE_FLUSH, SIX_FLUSH,
-      SEVEN_FLUSH, EIGHT_FLUSH, NINE_FLUSH, TEN_FLUSH,  JACK_FLUSH,
-      QUEEN_FLUSH, KING_FLUSH,  ACE_FLUSH};
+  uint32_t const face[NUMBER_OF_FACES] = {SIX_FIVE,   SEVEN_FIVE, EIGHT_FIVE,
+                                          NINE_FIVE,  TEN_FIVE,   JACK_FIVE,
+                                          QUEEN_FIVE, KING_FIVE,  ACE_FIVE};
+  uint32_t const face_flush[NUMBER_OF_FACES] = {
+      SIX_FLUSH,  SEVEN_FLUSH, EIGHT_FLUSH, NINE_FLUSH, TEN_FLUSH,
+      JACK_FLUSH, QUEEN_FLUSH, KING_FLUSH,  ACE_FLUSH};
 
-  for (int n = 0; n < 13; ++n) {
+  for (int n = 0; n < NUMBER_OF_FACES; ++n) {
     int const N = n << 2;
     mDeckcardsSuit[N] = SPADE;
     mDeckcardsSuit[N + 1] = HEART;
     mDeckcardsSuit[N + 2] = DIAMOND;
     mDeckcardsSuit[N + 3] = CLUB;
 
-    mDeckcardsFace[N] = face[12 - n];
-    mDeckcardsFace[N + 1] = face[12 - n];
-    mDeckcardsFace[N + 2] = face[12 - n];
-    mDeckcardsFace[N + 3] = face[12 - n];
+    mDeckcardsFace[N] = face[8 - n];
+    mDeckcardsFace[N + 1] = face[8 - n];
+    mDeckcardsFace[N + 2] = face[8 - n];
+    mDeckcardsFace[N + 3] = face[8 - n];
 
-    mDeckcardsFlush[N] = (short unsigned)face_flush[12 - n];
-    mDeckcardsFlush[N + 1] = (short unsigned)face_flush[12 - n];
-    mDeckcardsFlush[N + 2] = (short unsigned)face_flush[12 - n];
-    mDeckcardsFlush[N + 3] = (short unsigned)face_flush[12 - n];
+    mDeckcardsFlush[N] = (short unsigned)face_flush[8 - n];
+    mDeckcardsFlush[N + 1] = (short unsigned)face_flush[8 - n];
+    mDeckcardsFlush[N + 2] = (short unsigned)face_flush[8 - n];
+    mDeckcardsFlush[N + 3] = (short unsigned)face_flush[8 - n];
   }
 
   // n increments as rank.
@@ -39,7 +39,7 @@ FiveEval::FiveEval()
       for (int k = 2; k < j; ++k) {
         for (int l = 1; l < k; ++l) {
           // No straights.
-          for (int m = 0; m < l && !(i - m == 4 || (i == 12 && j == 3)); ++m) {
+          for (int m = 0; m < l && !(i - m == 4 || (i == 8 && j == 3)); ++m) {
             mRankPtr[face[i] + face[j] + face[k] + face[l] + face[m]] = n++;
           }
         }
@@ -72,6 +72,15 @@ FiveEval::FiveEval()
     }
   }
 
+  // Low straight non-flush.
+  mRankPtr[face[8] + face[0] + face[1] + face[2] + face[3]] = n++;
+
+  // Usual straight non-flush.
+  for (int i = 0; i < NUMBER_OF_FACES - 4; ++i) {
+    mRankPtr[face[i] + face[i + 1] + face[i + 2] + face[i + 3] + face[i + 4]] =
+        n++;
+  }
+
   // Triple.
   for (int i = 0; i < NUMBER_OF_FACES; ++i) {
     for (int j = 1; j < NUMBER_OF_FACES; ++j) {
@@ -84,13 +93,13 @@ FiveEval::FiveEval()
     }
   }
 
-  // Low straight non-flush.
-  mRankPtr[face[12] + face[0] + face[1] + face[2] + face[3]] = n++;
-
-  // Usual straight non-flush.
-  for (int i = 0; i < 9; ++i) {
-    mRankPtr[face[i] + face[i + 1] + face[i + 2] + face[i + 3] + face[i + 4]] =
-        n++;
+  // Full house.
+  for (int i = 0; i < NUMBER_OF_FACES; ++i) {
+    for (int j = 0; j < NUMBER_OF_FACES; ++j) {
+      if (i != j) {
+        mRankPtr[(3 * face[i]) + (face[j] << 1)] = n++;
+      }
+    }
   }
 
   // Flush not a straight.
@@ -99,21 +108,12 @@ FiveEval::FiveEval()
       for (int k = 2; k < j; ++k) {
         for (int l = 1; l < k; ++l) {
           for (int m = 0; m < l; ++m) {
-            if (!(i - m == 4 || (i == 12 && j == 3))) {
+            if (!(i - m == 4 || (i == 8 && j == 3))) {
               mFlushRankPtr[face_flush[i] | face_flush[j] | face_flush[k] |
                             face_flush[l] | face_flush[m]] = n++;
             }
           }
         }
-      }
-    }
-  }
-
-  // Full house.
-  for (int i = 0; i < NUMBER_OF_FACES; ++i) {
-    for (int j = 0; j < NUMBER_OF_FACES; ++j) {
-      if (i != j) {
-        mRankPtr[(3 * face[i]) + (face[j] << 1)] = n++;
       }
     }
   }
@@ -129,10 +129,10 @@ FiveEval::FiveEval()
 
   // Low straight flush.
   mFlushRankPtr[face_flush[0] | face_flush[1] | face_flush[2] | face_flush[3] |
-                face_flush[12]] = n++;
+                face_flush[8]] = n++;
 
   // Usual straight flush.
-  for (int i = 0; i < 9; ++i) {
+  for (int i = 0; i < NUMBER_OF_FACES - 4; ++i) {
     mFlushRankPtr[face_flush[i] | face_flush[i + 1] | face_flush[i + 2] |
                   face_flush[i + 3] | face_flush[i + 4]] = n++;
   }

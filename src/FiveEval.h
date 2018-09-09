@@ -36,7 +36,7 @@ class FiveEval {
   // The higher the rank the better the hand. Two hands of equal rank tie.
   uint16_t GetRank(int, int, int, int, int, int, int) const;
 
- private:
+  // private:
   uint16_t* mRankPtr;
   uint16_t* mFlushRankPtr;
   uint32_t mDeckcardsFace[DECK_SIZE];

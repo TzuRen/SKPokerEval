@@ -25,7 +25,6 @@
 #include "Constants.h"
 
 uint16_t const flush_ranks[MAX_SEVEN_FLUSH_KEY_INT + 1] = {
-
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    1400, 0,    0,    0,    0,

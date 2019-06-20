@@ -34,31 +34,28 @@ class SevenEval final {
   // integer from 0 (resp. Ace of Spades) to 51 (resp. Two of Clubs) inclusive.
   // Two such integers of the same residue modulo 4 correspond to the same suit.
   // The higher the rank the better the hand. Two hands of equal rank tie.
-  template <bool TDoFlushCheck = true>
-  static inline uint16_t GetRank(uint8_t i,
-                                 uint8_t j,
-                                 uint8_t k,
-                                 uint8_t m,
-                                 uint8_t n,
-                                 uint8_t p,
-                                 uint8_t q) {
+  static constexpr uint16_t GetRank(uint8_t i,
+                                    uint8_t j,
+                                    uint8_t k,
+                                    uint8_t m,
+                                    uint8_t n,
+                                    uint8_t p,
+                                    uint8_t q) {
     // Create a 7-card hand key by adding up each of the card keys.
     auto const key =
         card[i] + card[j] + card[k] + card[m] + card[n] + card[p] + card[q];
-    if (TDoFlushCheck) {
-      auto const suit = flush_check[key >> FLUSH_BIT_SHIFT];
-      if (NOT_A_SUIT != suit) {
-        // Generate a flush key, and look up the rank.
-        auto const* const s = suit_kronecker[suit];
-        return flush_ranks[s[i] | s[j] | s[k] | s[m] | s[n] | s[p] | s[q]];
-      }
+    auto const suit = flush_check[key >> FLUSH_BIT_SHIFT];
+    if (kNotASuit != suit) {
+      // Generate a flush key, and look up the rank.
+      auto const* const s = suit_kronecker[suit];
+      return flush_ranks[s[i] | s[j] | s[k] | s[m] | s[n] | s[p] | s[q]];
     }
     // Tear off the non-flush key strip, and look up the rank.
     return non_flush_ranks[FACE_BIT_MASK & key];
   }
 
  private:
-  SevenEval() {}
+  constexpr SevenEval() = default;
 };
 
 #endif  // SKPOKEREVAL_SEVENEVAL_H

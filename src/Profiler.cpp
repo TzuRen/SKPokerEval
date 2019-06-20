@@ -21,10 +21,10 @@
 #define SKPOKEREVAL_PROFILER_H
 
 #include <algorithm>
-#include <random>
-#include <iostream>
 #include <chrono>
+#include <iostream>
 #include <limits>
+#include <random>
 
 #include "Constants.h"
 #include "SevenEval.h"
@@ -38,7 +38,7 @@ class Profiler {
  public:
   static double RandomAccessProfile(unsigned const count) {
     std::default_random_engine gen;
-    std::uniform_int_distribution<uint8_t> dist(0, DECK_SIZE - 1);
+    std::uniform_int_distribution<uint8_t> dist(0, kDeckSize - 1);
     int const length = 28 * count;
     uint8_t* const buffer = (uint8_t*)malloc(length * sizeof(uint8_t));
     for (int i = 0; i < length; i += 7) {

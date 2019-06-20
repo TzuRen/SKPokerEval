@@ -22,21 +22,21 @@
 
 #include <stdint.h>
 
-#define DECK_SIZE 36
+constexpr int kNumberOfSuits = 4;
+constexpr int kNumberOfFaces = 9;
 
-#define NUMBER_OF_SUITS 4
-#define NUMBER_OF_FACES 9
+constexpr int kDeckSize = kNumberOfSuits * kNumberOfFaces;
 
-#define SPADE 0
-#define HEART 1
-#define DIAMOND 8
-#define CLUB 57
+constexpr int kSpade = 0;
+constexpr int kHeart = 1;
+constexpr int kDiamond = 8;
+constexpr int kClub = 57;
 
-#define INDEX_SPADE 0
-#define INDEX_HEART 1
-#define INDEX_DIAMOND 2
-#define INDEX_CLUB 3
-#define NOT_A_SUIT (-1)
+constexpr int kIndexSpade = 0;
+constexpr int kIndexHeart = 1;
+constexpr int kIndexDiamond = 2;
+constexpr int kIndexClub = 3;
+constexpr int kNotASuit = -1;
 
 // Cards
 constexpr uint8_t kAs = 0;
@@ -76,53 +76,53 @@ constexpr uint8_t k6h = 33;
 constexpr uint8_t k6d = 34;
 constexpr uint8_t k6c = 35;
 
-#define SIX_FIVE 0
-#define SEVEN_FIVE 1
-#define EIGHT_FIVE 5
-#define NINE_FIVE 22
-#define TEN_FIVE 94
-#define JACK_FIVE 312
-#define QUEEN_FIVE 992
-#define KING_FIVE 2422
-#define ACE_FIVE 5624
+constexpr int kSixFive = 0;
+constexpr int kSevenFive = 1;
+constexpr int kEightFive = 5;
+constexpr int kNineFive = 22;
+constexpr int kTenFive = 94;
+constexpr int kJackFive = 312;
+constexpr int kQueenFive = 992;
+constexpr int kKingFive = 2422;
+constexpr int kAceFive = 5624;
 
-#define SIX_FLUSH 1
-#define SEVEN_FLUSH SIX_FLUSH << 1
-#define EIGHT_FLUSH SEVEN_FLUSH << 1
-#define NINE_FLUSH EIGHT_FLUSH << 1
-#define TEN_FLUSH NINE_FLUSH << 1
-#define JACK_FLUSH TEN_FLUSH << 1
-#define QUEEN_FLUSH JACK_FLUSH << 1
-#define KING_FLUSH QUEEN_FLUSH << 1
-#define ACE_FLUSH KING_FLUSH << 1
+constexpr int SIX_FLUSH = 1;
+constexpr int SEVEN_FLUSH = SIX_FLUSH << 1;
+constexpr int EIGHT_FLUSH = SEVEN_FLUSH << 1;
+constexpr int NINE_FLUSH = EIGHT_FLUSH << 1;
+constexpr int TEN_FLUSH = NINE_FLUSH << 1;
+constexpr int JACK_FLUSH = TEN_FLUSH << 1;
+constexpr int QUEEN_FLUSH = JACK_FLUSH << 1;
+constexpr int KING_FLUSH = QUEEN_FLUSH << 1;
+constexpr int ACE_FLUSH = KING_FLUSH << 1;
 
 // _SEVEN tag suppressed
-#define SIX 0
-#define SEVEN 1
-#define EIGHT 5
-#define NINE 22
-#define TEN 98
-#define JACK 453
-#define QUEEN 2031
-#define KING 8698
-#define ACE 22854
+constexpr int kSix = 0;
+constexpr int kSeven = 1;
+constexpr int kEight = 5;
+constexpr int kNine = 22;
+constexpr int kTen = 98;
+constexpr int kJack = 453;
+constexpr int kQueen = 2031;
+constexpr int kKing = 8698;
+constexpr int kAce = 22854;
 // end of _SEVEN tag suppressed
 
-#define MAX_FIVE_NONFLUSH_KEY_INT ((4 * ACE_FIVE) + KING_FIVE)
-#define MAX_FIVE_FLUSH_KEY_INT \
-  (ACE_FLUSH | KING_FLUSH | QUEEN_FLUSH | JACK_FLUSH | TEN_FLUSH)
-#define MAX_SEVEN_NONFLUSH_KEY_INT ((4 * ACE) + (3 * KING))
-#define MAX_SEVEN_FLUSH_KEY_INT                                    \
-  (ACE_FLUSH | KING_FLUSH | QUEEN_FLUSH | JACK_FLUSH | TEN_FLUSH | \
-   NINE_FLUSH | EIGHT_FLUSH)
+constexpr int MAX_FIVE_NONFLUSH_KEY_INT = 4 * kAceFive + kKingFive;
+constexpr int MAX_FIVE_FLUSH_KEY_INT =
+    ACE_FLUSH | KING_FLUSH | QUEEN_FLUSH | JACK_FLUSH | TEN_FLUSH;
+constexpr int MAX_SEVEN_NONFLUSH_KEY_INT = 4 * kAce + 3 * kKing;
+constexpr int MAX_SEVEN_FLUSH_KEY_INT = ACE_FLUSH | KING_FLUSH | QUEEN_FLUSH |
+                                        JACK_FLUSH | TEN_FLUSH | NINE_FLUSH |
+                                        EIGHT_FLUSH;
 
-#define RANK_OFFSET_SHIFT 9
-#define RANK_HASH_MOD ((1 << RANK_OFFSET_SHIFT) - 1)
+constexpr int RANK_OFFSET_SHIFT = 9;
+constexpr int RANK_HASH_MOD = (1 << RANK_OFFSET_SHIFT) - 1;
 
-#define MAX_FLUSH_CHECK_SUM (7 * CLUB)
+constexpr int MAX_FLUSH_CHECK_SUM = 7 * kClub;
 
 // Bit masks
-#define FLUSH_BIT_SHIFT 23
-#define FACE_BIT_MASK ((1 << FLUSH_BIT_SHIFT) - 1)
+constexpr int FLUSH_BIT_SHIFT = 23;
+constexpr int FACE_BIT_MASK = (1 << FLUSH_BIT_SHIFT) - 1;
 
 #endif  // SKPOKEREVAL_CONSTANTS_H_

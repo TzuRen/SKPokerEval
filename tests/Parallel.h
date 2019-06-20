@@ -20,10 +20,10 @@
 #ifndef SKPOKEREVAL_PARALLEL_H
 #define SKPOKEREVAL_PARALLEL_H
 
-#include <vector>
-#include <thread>
-#include <future>
 #include <atomic>
+#include <future>
+#include <thread>
+#include <vector>
 
 template <class F>
 void ParallelFor(int const begin, int const end, F const fn) {

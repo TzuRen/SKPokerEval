@@ -20,48 +20,66 @@
 #ifndef SKPOKEREVAL_DECKCARDS_H
 #define SKPOKEREVAL_DECKCARDS_H
 
-#include "Constants.h"
 #include <cstdint>
+#include "Constants.h"
 
-uint_fast32_t const card[DECK_SIZE] = {
-    ACE + (SPADE << FLUSH_BIT_SHIFT),     ACE + (HEART << FLUSH_BIT_SHIFT),
-    ACE + (DIAMOND << FLUSH_BIT_SHIFT),   ACE + (CLUB << FLUSH_BIT_SHIFT),
+constexpr uint_fast32_t const card[kDeckSize] = {
+    kAce + (kSpade << FLUSH_BIT_SHIFT),
+    kAce + (kHeart << FLUSH_BIT_SHIFT),
+    kAce + (kDiamond << FLUSH_BIT_SHIFT),
+    kAce + (kClub << FLUSH_BIT_SHIFT),
 
-    KING + (SPADE << FLUSH_BIT_SHIFT),    KING + (HEART << FLUSH_BIT_SHIFT),
-    KING + (DIAMOND << FLUSH_BIT_SHIFT),  KING + (CLUB << FLUSH_BIT_SHIFT),
+    kKing + (kSpade << FLUSH_BIT_SHIFT),
+    kKing + (kHeart << FLUSH_BIT_SHIFT),
+    kKing + (kDiamond << FLUSH_BIT_SHIFT),
+    kKing + (kClub << FLUSH_BIT_SHIFT),
 
-    QUEEN + (SPADE << FLUSH_BIT_SHIFT),   QUEEN + (HEART << FLUSH_BIT_SHIFT),
-    QUEEN + (DIAMOND << FLUSH_BIT_SHIFT), QUEEN + (CLUB << FLUSH_BIT_SHIFT),
+    kQueen + (kSpade << FLUSH_BIT_SHIFT),
+    kQueen + (kHeart << FLUSH_BIT_SHIFT),
+    kQueen + (kDiamond << FLUSH_BIT_SHIFT),
+    kQueen + (kClub << FLUSH_BIT_SHIFT),
 
-    JACK + (SPADE << FLUSH_BIT_SHIFT),    JACK + (HEART << FLUSH_BIT_SHIFT),
-    JACK + (DIAMOND << FLUSH_BIT_SHIFT),  JACK + (CLUB << FLUSH_BIT_SHIFT),
+    kJack + (kSpade << FLUSH_BIT_SHIFT),
+    kJack + (kHeart << FLUSH_BIT_SHIFT),
+    kJack + (kDiamond << FLUSH_BIT_SHIFT),
+    kJack + (kClub << FLUSH_BIT_SHIFT),
 
-    TEN + (SPADE << FLUSH_BIT_SHIFT),     TEN + (HEART << FLUSH_BIT_SHIFT),
-    TEN + (DIAMOND << FLUSH_BIT_SHIFT),   TEN + (CLUB << FLUSH_BIT_SHIFT),
+    kTen + (kSpade << FLUSH_BIT_SHIFT),
+    kTen + (kHeart << FLUSH_BIT_SHIFT),
+    kTen + (kDiamond << FLUSH_BIT_SHIFT),
+    kTen + (kClub << FLUSH_BIT_SHIFT),
 
-    NINE + (SPADE << FLUSH_BIT_SHIFT),    NINE + (HEART << FLUSH_BIT_SHIFT),
-    NINE + (DIAMOND << FLUSH_BIT_SHIFT),  NINE + (CLUB << FLUSH_BIT_SHIFT),
+    kNine + (kSpade << FLUSH_BIT_SHIFT),
+    kNine + (kHeart << FLUSH_BIT_SHIFT),
+    kNine + (kDiamond << FLUSH_BIT_SHIFT),
+    kNine + (kClub << FLUSH_BIT_SHIFT),
 
-    EIGHT + (SPADE << FLUSH_BIT_SHIFT),   EIGHT + (HEART << FLUSH_BIT_SHIFT),
-    EIGHT + (DIAMOND << FLUSH_BIT_SHIFT), EIGHT + (CLUB << FLUSH_BIT_SHIFT),
+    kEight + (kSpade << FLUSH_BIT_SHIFT),
+    kEight + (kHeart << FLUSH_BIT_SHIFT),
+    kEight + (kDiamond << FLUSH_BIT_SHIFT),
+    kEight + (kClub << FLUSH_BIT_SHIFT),
 
-    SEVEN + (SPADE << FLUSH_BIT_SHIFT),   SEVEN + (HEART << FLUSH_BIT_SHIFT),
-    SEVEN + (DIAMOND << FLUSH_BIT_SHIFT), SEVEN + (CLUB << FLUSH_BIT_SHIFT),
+    kSeven + (kSpade << FLUSH_BIT_SHIFT),
+    kSeven + (kHeart << FLUSH_BIT_SHIFT),
+    kSeven + (kDiamond << FLUSH_BIT_SHIFT),
+    kSeven + (kClub << FLUSH_BIT_SHIFT),
 
-    SIX + (SPADE << FLUSH_BIT_SHIFT),     SIX + (HEART << FLUSH_BIT_SHIFT),
-    SIX + (DIAMOND << FLUSH_BIT_SHIFT),   SIX + (CLUB << FLUSH_BIT_SHIFT)};
+    kSix + (kSpade << FLUSH_BIT_SHIFT),
+    kSix + (kHeart << FLUSH_BIT_SHIFT),
+    kSix + (kDiamond << FLUSH_BIT_SHIFT),
+    kSix + (kClub << FLUSH_BIT_SHIFT)};
 
-uint_fast8_t const suit[DECK_SIZE] = {
-    INDEX_SPADE,   INDEX_HEART,   INDEX_DIAMOND, INDEX_CLUB,    INDEX_SPADE,
-    INDEX_HEART,   INDEX_DIAMOND, INDEX_CLUB,    INDEX_SPADE,   INDEX_HEART,
-    INDEX_DIAMOND, INDEX_CLUB,    INDEX_SPADE,   INDEX_HEART,   INDEX_DIAMOND,
-    INDEX_CLUB,    INDEX_SPADE,   INDEX_HEART,   INDEX_DIAMOND, INDEX_CLUB,
-    INDEX_SPADE,   INDEX_HEART,   INDEX_DIAMOND, INDEX_CLUB,    INDEX_SPADE,
-    INDEX_HEART,   INDEX_DIAMOND, INDEX_CLUB,    INDEX_SPADE,   INDEX_HEART,
-    INDEX_DIAMOND, INDEX_CLUB,    INDEX_SPADE,   INDEX_HEART,   INDEX_DIAMOND,
-    INDEX_CLUB};
+constexpr uint_fast8_t const suit[kDeckSize] = {
+    kIndexSpade,   kIndexHeart,   kIndexDiamond, kIndexClub,    kIndexSpade,
+    kIndexHeart,   kIndexDiamond, kIndexClub,    kIndexSpade,   kIndexHeart,
+    kIndexDiamond, kIndexClub,    kIndexSpade,   kIndexHeart,   kIndexDiamond,
+    kIndexClub,    kIndexSpade,   kIndexHeart,   kIndexDiamond, kIndexClub,
+    kIndexSpade,   kIndexHeart,   kIndexDiamond, kIndexClub,    kIndexSpade,
+    kIndexHeart,   kIndexDiamond, kIndexClub,    kIndexSpade,   kIndexHeart,
+    kIndexDiamond, kIndexClub,    kIndexSpade,   kIndexHeart,   kIndexDiamond,
+    kIndexClub};
 
-uint_fast16_t const suit_kronecker[NUMBER_OF_SUITS][DECK_SIZE] = {
+constexpr uint_fast16_t const suit_kronecker[kNumberOfSuits][kDeckSize] = {
     {ACE_FLUSH,   0, 0, 0, KING_FLUSH,  0, 0, 0, QUEEN_FLUSH, 0, 0, 0,
      JACK_FLUSH,  0, 0, 0, TEN_FLUSH,   0, 0, 0, NINE_FLUSH,  0, 0, 0,
      EIGHT_FLUSH, 0, 0, 0, SEVEN_FLUSH, 0, 0, 0, SIX_FLUSH,   0, 0, 0},
